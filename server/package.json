@@ -6,7 +6,9 @@
     "dev": "tsx watch src/server.ts",
     "check": "tsc --noEmit",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "db:check": "tsx src/check-db.ts",
+    "db:init": "tsx src/init-db.ts"
   },
   "keywords": [],
   "author": "",
@@ -14,11 +16,13 @@
   "type": "module",
   "dependencies": {
     "dotenv": "^18.0.9",
-    "express": "^5.3.0"
+    "express": "^5.3.0",
+    "pg": "^8.23.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^24.19.2",
+    "@types/pg": "^8.23.1",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   }
