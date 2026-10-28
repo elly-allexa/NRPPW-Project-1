@@ -8,7 +8,8 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "db:check": "tsx src/check-db.ts",
-    "db:init": "tsx src/init-db.ts"
+    "db:init": "tsx src/init-db.ts",
+    "db:seed": "tsx src/seed-db.ts"
   },
   "keywords": [],
   "author": "",

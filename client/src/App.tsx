@@ -1,39 +1,16 @@
-import { useState } from "react";
-import "./App.css";
+import HomePage from "./HomePage";
+import PassPage from "./PassPage";
 
-function App() {
-  const [message, setMessage] = useState("Server not checked yet.");
+export default function App() {
+  const match = window.location.pathname.match(
+    /^\/info\/([^/]+)\/?$/
+  );
 
-  async function checkServer() {
-    try {
-      const response = await fetch("/api/health");
+  const id = match?.[1];
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const data = await response.json();
-      setMessage(data.message);
-    } catch (error) {
-      setMessage(
-        error instanceof Error
-          ? `Request failed: ${error.message}`
-          : "Request failed."
-      );
-    }
+  if (id) {
+    return <PassPage key={id} id={id} />;
   }
 
-  return (
-    <main>
-      <h1>Digital Passes</h1>
-
-      <button onClick={checkServer}>
-        Check server
-      </button>
-
-      <p>{message}</p>
-    </main>
-  );
+  return <HomePage />;
 }
-
-export default App;
