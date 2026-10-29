@@ -1,6 +1,6 @@
 import { pool } from "./database.js";
 
-type PassData = {
+export type PassData = {
   id: string;
   name: string;
   document: string;
@@ -24,4 +24,49 @@ export async function findPass(id: string): Promise<PassData | null> {
   );
 
   return result.rows[0] ?? null;
+}
+
+export function isPassId(id: string): boolean {
+  return uuidPattern.test(id);
+}
+
+export async function listPasses(): Promise<PassData[]> {
+  const result = await pool.query<PassData>(
+    `SELECT id, name, document, issued_at AS "issuedAt", status
+     FROM passes
+     ORDER BY issued_at DESC, id`
+  );
+
+  return result.rows;
+}
+
+export async function cancelPass(id: string): Promise<boolean> {
+  if (!isPassId(id)) {
+    return false;
+  }
+
+  const result = await pool.query(
+    `UPDATE passes
+     SET status = 'CANCELLED'
+     WHERE id = $1
+     RETURNING id`,
+    [id]
+  );
+
+  return result.rowCount === 1;
+}
+
+export async function deletePass(id: string): Promise<boolean> {
+  if (!isPassId(id)) {
+    return false;
+  }
+
+  const result = await pool.query(
+    `DELETE FROM passes
+     WHERE id = $1
+     RETURNING id`,
+    [id]
+  );
+
+  return result.rowCount === 1;
 }

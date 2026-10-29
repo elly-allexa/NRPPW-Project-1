@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import AuthPanel from "./AuthPanel";
 import "./App.css";
+
 
 type PassStats = {
   total: number;
@@ -45,6 +47,7 @@ function HomePage() {
   return (
     <main>
       <h1>Digital Passes</h1>
+      <AuthPanel />
 
       {error ? (
         <p role="alert">Could not load statistics: {error}</p>
