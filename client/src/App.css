@@ -182,3 +182,183 @@
     border-right-color: var(--border);
   }
 }
+
+body {
+  display: block;
+  margin: 0;
+  min-width: 320px;
+}
+
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+main.app-page {
+  width: min(1100px, calc(100% - 40px));
+  margin-inline: auto;
+  padding-block: 40px;
+  text-align: center;
+}
+
+.app-page section {
+  width: 100%;
+  min-width: 0;
+  margin-inline: auto;
+}
+
+.app-page form {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-block: 12px 24px;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  margin-block: 20px;
+}
+
+.app-page table {
+  width: 100%;
+  margin-inline: auto;
+  border-collapse: collapse;
+}
+
+.app-page th,
+.app-page td {
+  padding: 12px 16px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.app-page td:last-child {
+  white-space: nowrap;
+}
+
+.app-page button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.app-page td button {
+  margin: 4px;
+}
+
+.app-page dl {
+  max-width: 520px;
+  margin: 24px auto;
+}
+
+.app-page dt {
+  margin-top: 16px;
+}
+
+.app-page dd {
+  margin: 4px 0 16px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+main.app-page h1 {
+  font-size: clamp(2rem, 7vw, 4rem);
+}
+
+@media (max-width: 600px) {
+  main.app-page {
+    width: calc(100% - 24px);
+    padding-block: 24px;
+  }
+
+  .app-page p,
+  .app-page dd {
+    overflow-wrap: anywhere;
+  }
+
+  .app-page button {
+    min-height: 44px;
+    padding: 10px 14px;
+  }
+
+  .app-page th,
+  .app-page td {
+    padding: 10px;
+  }
+
+  .app-page form {
+    flex-wrap: wrap;
+  }
+}
+
+.pass-cards {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .passes-desktop {
+    display: none;
+  }
+
+  .pass-cards {
+    display: grid;
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left;
+  }
+
+  .pass-card {
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid var(--border, currentColor);
+    border-radius: 12px;
+  }
+
+  .pass-card h3 {
+    margin: 0 0 16px;
+    font-size: 1.2rem;
+    overflow-wrap: anywhere;
+  }
+
+  .app-page .pass-card dl {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1fr);
+    gap: 12px;
+    max-width: none;
+    margin: 0;
+  }
+
+  .app-page .pass-card dt,
+  .app-page .pass-card dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .pass-card dt {
+    font-weight: 600;
+  }
+
+  .pass-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .pass-actions a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: 8px;
+  }
+}

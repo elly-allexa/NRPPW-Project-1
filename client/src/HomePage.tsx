@@ -45,7 +45,7 @@ function HomePage() {
   }, []);
 
   return (
-    <main>
+    <main className="app-page">
       <h1>Digital Passes</h1>
       <AuthPanel />
 

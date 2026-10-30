@@ -98,49 +98,97 @@ export default function PassManager() {
       ) : passes.length === 0 ? (
         <p>No passes yet.</p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Document</th>
-              <th>Issued at</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+        <>
+            <div className="table-scroll passes-desktop">
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Document</th>
+                    <th>Issued at</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
 
-          <tbody>
-            {passes.map((pass) => (
-              <tr key={pass.id}>
-                <td>{pass.name}</td>
-                <td>{pass.document}</td>
-                <td>
-                  {new Date(pass.issuedAt).toLocaleString()}
-                </td>
-                <td>{pass.status}</td>
-                <td>
-                  <a href={`/info/${pass.id}`}>View</a>{" "}
+                <tbody>
+                {passes.map((pass) => (
+                    <tr key={pass.id}>
+                    <td>{pass.name}</td>
+                    <td>{pass.document}</td>
+                    <td>
+                        {new Date(pass.issuedAt).toLocaleString()}
+                    </td>
+                    <td>{pass.status}</td>
+                    <td>
+                        <a href={`/info/${pass.id}`}>View</a>{" "}
 
-                  <button
-                    type="button"
-                    disabled={busy || pass.status === "CANCELLED"}
-                    onClick={() => void changePass(pass.id, "cancel")}
-                  >
-                    Cancel
-                  </button>{" "}
+                        <button
+                        type="button"
+                        disabled={busy || pass.status === "CANCELLED"}
+                        onClick={() => void changePass(pass.id, "cancel")}
+                        >
+                        Cancel
+                        </button>{" "}
 
-                  <button
-                    type="button"
-                    disabled={busy}
-                    onClick={() => void changePass(pass.id, "delete")}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                        <button
+                        type="button"
+                        disabled={busy}
+                        onClick={() => void changePass(pass.id, "delete")}
+                        >
+                        Delete
+                        </button>
+                    </td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+            </div>
+            <ul className="pass-cards">
+        {passes.map((pass) => (
+        <li className="pass-card" key={pass.id}>
+            <h3>{pass.name}</h3>
+
+            <dl>
+            <dt>Document</dt>
+            <dd>{pass.document}</dd>
+
+            <dt>Issued at</dt>
+            <dd>
+                <time dateTime={pass.issuedAt}>
+                {new Date(pass.issuedAt).toLocaleString()}
+                </time>
+            </dd>
+
+            <dt>Status</dt>
+            <dd>
+                <strong>{pass.status}</strong>
+            </dd>
+            </dl>
+
+            <div className="pass-actions">
+            <a href={`/info/${pass.id}`}>View</a>
+
+            <button
+                type="button"
+                disabled={busy || pass.status === "CANCELLED"}
+                onClick={() => void changePass(pass.id, "cancel")}
+            >
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                disabled={busy}
+                onClick={() => void changePass(pass.id, "delete")}
+            >
+                Delete
+            </button>
+            </div>
+        </li>
+        ))}
+    </ul>
+    </>
       )}
     </section>
   );

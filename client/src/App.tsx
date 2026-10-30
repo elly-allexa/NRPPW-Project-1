@@ -1,5 +1,6 @@
 import HomePage from "./HomePage";
 import PassPage from "./PassPage";
+import "./App.css";
 
 export default function App() {
   const match = window.location.pathname.match(

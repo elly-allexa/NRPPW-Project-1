@@ -61,12 +61,16 @@ export default function PassPage({ id }: { id: string }) {
   }, [id]);
 
   if (state.kind === "loading") {
-    return <p>Loading pass...</p>;
-  }
+  return (
+    <main className="app-page">
+      <p>Loading pass...</p>
+    </main>
+  );
+}
 
   if (state.kind === "error") {
     return (
-      <main>
+      <main className="app-page">
         <h1>Digital Pass</h1>
         <p role="alert">{state.message}</p>
         <a href="/">Home</a>
@@ -77,7 +81,7 @@ export default function PassPage({ id }: { id: string }) {
   const { pass } = state;
 
   return (
-    <main>
+    <main className="app-page">
       <h1>Digital Pass</h1>
 
       <dl>
