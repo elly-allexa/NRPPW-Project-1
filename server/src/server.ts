@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import oidc from "express-openid-connect";
 import type { RequestHandler } from "express";
+import { createPassApi } from "./pass-api.js";
 
 const app = express();
 const port = Number(process.env.PORT ?? 3000); 
@@ -87,6 +88,8 @@ app.use(auth({
     logout: false
   }
 }));
+
+app.use("/passes", createPassApi(requiredEnv("AUTH0_ISSUER_BASE_URL"), requiredEnv("AUTH0_AUDIENCE"), baseURL));
 
 app.use(express.static(clientDist, {
   index: false

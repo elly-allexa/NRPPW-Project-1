@@ -70,3 +70,20 @@ export async function deletePass(id: string): Promise<boolean> {
 
   return result.rowCount === 1;
 }
+
+export async function insertPass(id: string, name: string, document: string): Promise<PassData> {
+  const result = await pool.query<PassData>(
+    `INSERT INTO passes (id, name, document, issued_at, status)
+     VALUES ($1, $2, $3, $4, 'ACTIVE')
+     RETURNING id, name, document, issued_at AS "issuedAt", status`,
+    [id, name, document, new Date()]
+  );
+
+  const pass = result.rows[0];
+
+  if (!pass) {
+    throw new Error("Pass was not created");
+  }
+
+  return pass;
+}
